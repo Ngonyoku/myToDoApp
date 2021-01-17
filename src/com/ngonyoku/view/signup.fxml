@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
-<?import com.jfoenix.controls.JFXPasswordField?>
-<?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ngonyoku.controller.SignUpController">
     <AnchorPane prefHeight="75.0" prefWidth="700.0" style="-fx-background-color: #6200EE;">
@@ -28,7 +25,7 @@
             <Font size="14.0" />
         </font>
     </JFXTextField>
-    <JFXTextField fx:id="signUpFLastName" focusColor="#03dac5" layoutX="237.0" layoutY="149.0" prefHeight="25.0" prefWidth="260.0" promptText="Last Name" unFocusColor="#6200ee">
+    <JFXTextField fx:id="signUpLastName" focusColor="#03dac5" layoutX="237.0" layoutY="149.0" prefHeight="25.0" prefWidth="260.0" promptText="Last Name" unFocusColor="#6200ee">
         <font>
             <Font size="14.0" />
         </font>
@@ -51,5 +48,5 @@
             <Font size="14.0" />
         </font>
     </JFXPasswordField>
-    <JFXButton layoutX="237.0" layoutY="331.0" prefHeight="25.0" prefWidth="260.0" style="-fx-background-color: #6200EE;" text="SIGN UP" textFill="WHITE" />
+    <JFXButton fx:id="signUpUserBtn" layoutX="237.0" layoutY="331.0" prefHeight="25.0" prefWidth="260.0" style="-fx-background-color: #6200EE;" text="SIGN UP" textFill="WHITE" />
 </AnchorPane>
