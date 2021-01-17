@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.ngonyoku.controller.AddItemController">
+    <children>
+        <AnchorPane prefHeight="75.0" prefWidth="700.0" style="-fx-background-color: #6200EE;">
+            <children>
+                <Label alignment="CENTER" layoutX="14.0" layoutY="12.0" prefHeight="53.0" prefWidth="260.0"
+                       text="My.ToDoApp" textFill="WHITE">
+                    <font>
+                        <Font size="36.0"/>
+                    </font>
+                </Label>
+            </children>
+        </AnchorPane>
+        <Label alignment="CENTER" layoutX="252.0" layoutY="183.0" prefHeight="35.0" prefWidth="221.0"
+               text="No Tasks for Today. Yet!" textFill="#6200ee">
+            <font>
+                <Font size="18.0"/>
+            </font>
+        </Label>
+        <ImageView fx:id="addBtn" fitHeight="53.0" fitWidth="62.0" layoutX="324.0" layoutY="251.0" pickOnBounds="true"
+                   preserveRatio="true">
+            <image>
+                <Image url="@../assets/baseline_add_circle_black_18dp.png"/>
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>
