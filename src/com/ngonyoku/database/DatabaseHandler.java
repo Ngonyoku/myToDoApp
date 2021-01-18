@@ -2,10 +2,7 @@ package com.ngonyoku.database;
 
 import com.ngonyoku.model.Users;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class DatabaseHandler extends Configs {
     Connection databaseConnection;
@@ -31,20 +28,47 @@ public class DatabaseHandler extends Configs {
                 ") VALUES(?, ?, ?, ?, ?, ?)";
 
         try {
-            PreparedStatement statement = getDatabaseConnection().prepareStatement(insertSQL);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getUsername());
-            statement.setString(4, user.getPassword());
-            statement.setString(5, user.getLocation());
-            statement.setString(6, user.getGender());
+            PreparedStatement stmt = getDatabaseConnection().prepareStatement(insertSQL);
+            stmt.setString(1, user.getFirstName());
+            stmt.setString(2, user.getLastName());
+            stmt.setString(3, user.getUsername());
+            stmt.setString(4, user.getPassword());
+            stmt.setString(5, user.getLocation());
+            stmt.setString(6, user.getGender());
 
-            int rowCount = statement.executeUpdate();
+            int rowCount = stmt.executeUpdate();
 
             System.out.println(rowCount + " rows Affected!");
 
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    public ResultSet getUser(Users user) {
+        ResultSet rs = null;
+        if (!user.getUsername().equals("") || !user.getPassword().equals("")) {
+            //Check if the record exists
+            String query = "SELECT * FROM " + Const.USERS_TABLE +
+                    " WHERE " + Const.USERS_USERNAME + " = ?" +
+                    " AND " + Const.USERS_PASSWORD + " = ?" +
+                    ";";
+
+
+            try {
+                PreparedStatement stmt = getDatabaseConnection().prepareStatement(query);
+                stmt.setString(1, user.getUsername());
+                stmt.setString(2, user.getPassword());
+
+                rs = stmt.executeQuery();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("Please Enter your credentials");
+        }
+        return rs;
     }
 }

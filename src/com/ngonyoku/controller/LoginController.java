@@ -6,12 +6,18 @@ import com.jfoenix.controls.JFXTextField;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.ngonyoku.animations.Shaker;
+import com.ngonyoku.database.DatabaseHandler;
+import com.ngonyoku.model.Users;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 public class LoginController {
@@ -29,15 +35,15 @@ public class LoginController {
     private JFXPasswordField loginPassword;
 
     @FXML
-    private JFXButton loginLogInBtn;
+    private JFXButton loginBtn;
 
     @FXML
     private JFXButton loginSignUpBtn;
 
+    private DatabaseHandler databaseHandler;
+
     @FXML
     void initialize() {
-        String username = loginUsername.getText().trim();
-        String password = loginPassword.getText().trim();
 
         loginSignUpBtn.setOnAction(e -> {
             //Will take the user to the Sign Up Screen
@@ -56,15 +62,33 @@ public class LoginController {
             stage.showAndWait();
         });
 
-        loginLogInBtn.setOnAction(e -> {
+        loginBtn.setOnAction(e -> {
+            databaseHandler = new DatabaseHandler();
+
+            String username = loginUsername.getText().trim();
+            String password = loginPassword.getText().trim();
+
             if (!username.equals("") || !loginPassword.equals("")) {
-                loginUser(username, password);
+                ResultSet userRow = databaseHandler.getUser(new Users(username, password));
+                int counter = 0;
+
+                try {
+                    while (userRow.next()) {
+                        counter++;
+                    }
+
+                    if (counter == 1) {
+                        System.out.println("Successfully Logged In");
+                    } else {
+                        new Shaker(loginUsername).shake();
+                        new Shaker(loginPassword).shake();
+                    }
+                } catch (SQLException exception) {
+                    exception.printStackTrace();
+                }
             } else {
                 System.out.println("Please Fill in all the Fields");
             }
         });
-    }
-
-    private void loginUser(String username, String password) {
     }
 }
